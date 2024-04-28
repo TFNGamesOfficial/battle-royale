@@ -1,0 +1,210 @@
+---
+layout: default
+title: Contact Us
+weight: 2
+permalink: /help/contact-us/
+---
+
+<head>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+}
+
+#ticketForm {
+  background-color: #bbbbbb;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+  margin: 20px auto;
+  width: 60%;
+  text-align: center;
+}
+
+#ticketForm label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+}
+
+#ticketForm select, #ticketForm textarea, #ticketForm input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  outline: none;
+  background-color: #fff;
+}
+
+  #ticketForm select, #ticketForm textarea, #ticketForm input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  outline: none;
+  background-color: #fff;
+}
+
+#ticketForm textarea {
+  height: 150px;
+  resize: none;
+}
+
+#ticketForm input[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#ticketForm input[type="submit"]:hover {
+  background-color: #444;
+}
+
+    .not-selectable {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
+  </style>
+</head>
+
+    <form id="ticketForm">
+  <label for="subject">Subject:</label>
+  <select class="not-selectable" id="subject" name="subject" required>
+    <option value="technical-support">Technical Support</option>
+  </select><br><br>
+  <label for="sender_name">Displayname:</label>
+  <input type="text" id="sender_name" name="sender_name"></textarea><br><br>
+  <label for="message">Message:</label>
+  <textarea id="message" name="message" required></textarea><br><br>
+  <label for="email">Email:</label>
+  <input type="email" id="sender_email" name="sender_email" required><br><br>
+  <label id="sys_os_label" for="system_os">System OS:</label>
+  <select id="system_os" name="system_os">
+    <option value="select">Select</option>
+    <optgroup label="Desktop">
+    <option value="windows">Windows</option>
+    </optgroup>
+    <optgroup label="Mobile">
+    <option value="ios">iOS</option>
+    <option value="android">Android</option>
+    </optgroup>
+    <optgroup label="Console">
+    <option value="XSX">XBOX Series S/X</option>
+    <option value="XboxOneGDK">XBOX One</option>
+    <option value="ps4">PlayStation 4</option>
+    </optgroup>
+  </select>
+<label id="sys_other_label" for="system_other">Type:</label>
+<select id="system_other" name="system_other" required>
+    <option value="select">Select</option>
+    <optgroup label="Support">
+    <option value="player_support">Player Support</option>
+    <option value="technical_support">Technical Support</option>
+    </optgroup>
+    <optgroup label="Report">
+    <option value="bug_report">Bug Report</option>
+    <option value="island_report">Island Report</option>
+    <option value="player_report">Player Report</option>
+  </optgroup>
+  </select>
+  <br><br id="br_tag">
+  <input type="submit" value="Submit"><br><br>
+<div id="alert_success" class="alert alert-success" role="alert" style="display: none;">
+  Ticket was created!
+</div>
+<div id="alert_fail" class="alert alert-danger" role="alert" style="display: none;">
+  Error!
+</div>
+</form>
+
+<script>
+const form = document.getElementById("ticketForm");
+const system_os = document.getElementById("system_os");
+const sys_os_label = document.getElementById("sys_os_label");
+
+const subject = document.getElementById("subject");
+subject.addEventListener("change", function (event) {
+  if (subject.value === "open-question") {
+    system_os.style.display = "none";
+    sys_os_label.style.display = "none";
+    document.getElementById("br_tag").style.display = "none";
+  } else {
+    system_os.style.display = "block";
+    sys_os_label.style.display = "block";
+    document.getElementById("br_tag").style.display = "block";
+  }
+});
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const subject = form.elements.subject.value;
+  const sender_name = form.elements.sender_name.value;
+  const message = form.elements.message.value;
+  const sender_email = form.elements.sender_email.value;
+  const system_os = form.elements.system_os.value;
+  const system_other = form.elements.system_other.value;
+  
+  const data = {
+    subject,
+    message,
+    sender_email,
+    system_os,
+    system_other
+  };
+
+  const headers = {
+    "Authorization": "Token ueY2C2iHPN4WQXW1YRdVIIKmPW8yGhQmIlGxosXuE2yYfA==",
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+ //   "x-cors-api-key": "temp_9206cde71da30d4a289d694d01ac277f"
+  };
+
+  const url = 'https://corsproxy.io/?' + encodeURIComponent('https://dev.epicgames.com/portal/api/v1/services/tickets/submit/');
+
+  fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(data)
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Error: Ticket submission failed");
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log("Success: Ticket submitted");
+      showSuccess("Success: Ticket submitted");
+    })
+    .catch(error => {
+      console.error(error);
+      showError("Error: Ticket submission failed", error);
+    });
+});
+
+function showSuccess(message) {
+  const alert_success = document.getElementById("alert_success");
+  alert_success.style.display = "block";
+  alert_success.textContent = message;
+  form.style.display = "none";
+}
+
+function showError(message, error) {
+  console.error(error);
+  const alert_fail = document.getElementById("alert_fail");
+    alert_fail.style.display = "block";
+    alert_fail.textContent = "Error: Ticket submission failed";
+}
+</script>

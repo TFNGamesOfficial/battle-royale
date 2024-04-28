@@ -1,0 +1,87 @@
+### Site Settings ###
+title               : DevNite Battle Royale
+description         : Official site for DevNite Battle Royale!
+baseurl             : "/battle-royale"                     # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
+# repository          : TFNGamesOfficial/TFNGamesOfficial.github.io    Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
+remote_theme        : DevniteCreative/Rhinestone2
+
+open_new_tab        : false                             # Opens external URLs in new tab (works for posts, projects and navbar only)
+
+
+### Plugins ###
+plugins:
+  - jemoji
+
+
+### Navbar Settings ###
+nav_exclude:                                            # The following paths are excluded from navbar
+  - pages/tags.html
+  - pages/status.html
+  - pages/not-found.html
+  - pages/launchersp.md
+  - pages/support/launcherlds.md
+  - pages/docs.html
+  - pages/discover/creative/devgames.md
+  - pages/discover/creative/1800-8115-4976.html
+  - pages/discover/creative/1800-8115-4975.html
+  - pages/events/sti/help.html
+  - pages/discover/creative/devgames/highgames-series.md
+  - pages/privacy-policy.md
+  - pages/index.md
+  - pages/clone-uefn.md
+
+
+### Author Info ###
+author:
+  name              : DevGames
+  image             : https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1200px-HD_transparent_picture.png
+
+
+### Posts ###
+permalink: /news/:title
+
+
+### Collections ###
+collections:
+  projects:
+    output: true
+    permalink: /support/:name
+  docs:
+    output: true
+    permalink: /support/app/:name
+
+
+### Disqus ###
+disqus:
+  shortname: your-short-name-disqus                     # Your website Shortname on disqus
+
+
+### Analytics ###
+analytics:
+  enabled: false                                        # Set true to enable analytics
+  google:
+    tracking_id: your-google-tracking-id
+
+
+
+
+### Defaults for collections ###
+defaults:
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "page"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      comments: false                                   # Set to true to enable disqus comments
+
+
+### Exclude from processing ###
+exclude:
+  - README.md
+  - CONTRIBUTING.md
+  - LICENSE
+  - "*.log"
