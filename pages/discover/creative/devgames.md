@@ -1,7 +1,7 @@
 ---
 layout: home
 title: Games by DevGames
-permalink: /@devgames/
+permalink: /battle-royale/@devgames/
 weight: 1
 ---
 <head>
