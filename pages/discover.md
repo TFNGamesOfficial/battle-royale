@@ -149,7 +149,7 @@ weight: 1
 <body>
     <div class="profile">
         <div class="recently-played">
-        <a href="/@devgames/"><h3>By DevGames</h3></a>
+        <a href="/battle-royale/@devgames/"><h3>By DevGames</h3></a>
             <div class="island-container">
                 <img src="https://slutares.sirv.com/Devnite/img/Playlists/playlist_solo.jpeg" alt="" class="island-image">
                 <div class="island-name">Solo</div>
@@ -162,7 +162,7 @@ weight: 1
                 <div class="island-code">Playlist_DefaultSquads</div>
                 <div class="island-version">Version 2.40</div>
             </div>
-		<a href="/creator/devgames/highgames-series/">
+		<a href="/battle-royale/creator/devgames/highgames-series/">
             <div class="island-container">
                 <img src="https://slutares.sirv.com/TxE_FN/images/RdI1024.jpeg" alt="" class="island-image">
                 <div class="island-name">Highgames</div>
